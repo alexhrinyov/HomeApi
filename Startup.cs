@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HomeApi
@@ -41,6 +42,9 @@ namespace HomeApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeApi", Version = "v1" });
             });
+            // Подключаем автомаппинг
+            var assembly = Assembly.GetAssembly(typeof(MappingProfile));
+            services.AddAutoMapper(assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
