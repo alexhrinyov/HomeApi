@@ -1,4 +1,6 @@
+using FluentValidation.AspNetCore;
 using HomeApi.Configuration;
+using HomeApi.Contracts.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +40,8 @@ namespace HomeApi
             // Добавляем новый сервис
             services.Configure<HomeOptions>(HomeConfig);
             services.AddControllers();
+            // Подключаем валидацию
+            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddDeviceRequestValidator>());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeApi", Version = "v1" });
